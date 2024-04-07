@@ -1,3 +1,4 @@
+import { bouncy } from "ldrs";
 import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../context/App_context";
 import { FaBookmark } from "react-icons/fa";
@@ -11,13 +12,13 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const { recipe, saveFoodById, checkdata } = useContext(AppContext);
   const [loading, setLoading] = useState(true); // State to track loading status
-  const [success, setSuccess] = useState(false);
 
   // Reverse the recipe array to show the latest item first
   const reversedRecipe = [...recipe].reverse();
   const fetchingDataCheck = checkdata.status;
 
   useEffect(() => {
+    bouncy.register();
     // Simulate loading time
     setTimeout(() => {
       setLoading(false); // Set loading to false after some time
@@ -62,7 +63,7 @@ const Home = () => {
 
       {loading && fetchingDataCheck === 200 ? ( // Conditionally render loading message
         <div className=" flex items-center justify-center mt-16">
-          <p>Loading...</p>
+          <l-bouncy size="45" speed="1.75" color="#FFC0CB"></l-bouncy>
         </div>
       ) : (
         <div className="mt-4 grid grid-cols-1 md:grid-cols-4 gap-4">
