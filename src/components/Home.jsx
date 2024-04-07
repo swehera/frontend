@@ -63,7 +63,7 @@ const Home = () => {
 
       {loading && fetchingDataCheck === 200 ? ( // Conditionally render loading message
         <div className=" flex items-center justify-center mt-16">
-          <l-bouncy size="45" speed="1.75" color="#FFC0CB"></l-bouncy>
+          <l-bouncy size="45" speed="1.75" color="#FF012D"></l-bouncy>
         </div>
       ) : (
         <div className="mt-4 grid grid-cols-1 md:grid-cols-4 gap-4">
