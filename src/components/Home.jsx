@@ -9,8 +9,13 @@ import { CgProfile } from "react-icons/cg";
 const Home = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
+  const { recipe, saveFoodById, checkdata } = useContext(AppContext);
   const [loading, setLoading] = useState(true); // State to track loading status
-  const { recipe, saveFoodById } = useContext(AppContext);
+  const [success, setSuccess] = useState(false);
+
+  // Reverse the recipe array to show the latest item first
+  const reversedRecipe = [...recipe].reverse();
+  const fetchingDataCheck = checkdata.status;
 
   useEffect(() => {
     // Simulate loading time
@@ -18,6 +23,12 @@ const Home = () => {
       setLoading(false); // Set loading to false after some time
     }, 2000); // Adjust this time according to your actual fetching time
   }, []); // Empty dependency array to run this effect only once
+
+  // const checkDataFetching = () => {
+  //   if(checkdata?.status = 200) {
+
+  //   }
+  // }
 
   const saved = async (id) => {
     const result = await saveFoodById(id);
@@ -34,8 +45,8 @@ const Home = () => {
     });
   };
 
-  // Reverse the recipe array to show the latest item first
-  const reversedRecipe = [...recipe].reverse();
+  console.log("this is reversed recipe", reversedRecipe);
+  console.log("this is for check status", checkdata);
 
   return (
     <div className="py-3 px-5 w-full">
@@ -49,7 +60,7 @@ const Home = () => {
         />
       </div>
 
-      {loading ? ( // Conditionally render loading message
+      {loading && fetchingDataCheck === 200 ? ( // Conditionally render loading message
         <div className=" flex items-center justify-center mt-16">
           <p>Loading...</p>
         </div>

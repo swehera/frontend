@@ -10,6 +10,7 @@ const App_State = (props) => {
   const [userFoodItem, setUserFoodItem] = useState([]);
   const [isAuthenticated, setisAuthenticated] = useState(false);
   const [reload, setreload] = useState(true);
+  const [checkdata, setCheckData] = useState("");
 
   //common url
   // const url = "http://localhost:3000/api";
@@ -18,6 +19,10 @@ const App_State = (props) => {
   useEffect(() => {
     // login("1@gmail.com", "her7762");
     const fetchRecipe = async () => {
+      // const checkData = url;
+      // if(checkData?.status === 200) {
+
+      // }
       const api = await axios.get(`${url}/`, {
         headers: {
           "Content-Type": "application/json",
@@ -25,6 +30,7 @@ const App_State = (props) => {
         withCredentials: true,
       });
       console.log(api);
+      setCheckData(api);
       console.log(api.data.recipe);
       setRecipe(api.data.recipe);
     };
@@ -224,6 +230,7 @@ const App_State = (props) => {
         login,
         register,
         addFood,
+        checkdata,
         recipe,
         getRecipeById,
         saveFoodById,
